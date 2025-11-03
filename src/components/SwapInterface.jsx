@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { TokenSelector } from "./TokenSelector";
+import { HiArrowsUpDown } from "react-icons/hi2";
+import { BsStars } from "react-icons/bs";
+import { RiEqualizerLine } from "react-icons/ri";
 import {
-  ArrowDownIcon,
   EyeIcon,
-  ChevronDownIcon,
   InfoIcon,
 } from "lucide-react";
 import TriggerInterface from "./TriggerInterface";
@@ -100,14 +101,14 @@ export default function SwapInterface() {
             <div className="p-4">
               <div className="flex items-center gap-1 bg-blend-color border border-gray-800 rounded-full px-3 py-1.5 w-fit cursor-pointer hover:bg-[#252e40]">
                 <div className="w-5 h-5 flex items-center justify-center cursor-pointer">
-                  <span className="text-[#76E268] text-lg">⚡</span>
+                  <span className="text-[#c9f283] text-lg"><BsStars size={12} /></span>
                 </div>
                 <span className="text-xs cursor-pointer">Ultra V3</span>
-                <span className=" bg-[#c9f283] text-xs px-1 rounded text-black">
+                <span className=" bg-[#c9f283] text-xs px-0.5 rounded text-black">
                   New
                 </span>
                 <button className="text-gray-400 cursor-pointer">
-                  <ChevronDownIcon size={16} />
+                  <RiEqualizerLine  size={14} />
                 </button>
               </div>
             </div>
@@ -119,13 +120,13 @@ export default function SwapInterface() {
                 <div className="flex items-center gap-2 text-xs text-gray-400">
                   <span>0.010147684 SOL</span>
                   <button
-                    className="bg-gray-700/40 rounded  px-1.5 py-1 cursor-pointer hover:bg-gray-600"
+                    className="bg-gray-700/40 rounded text-xs  px-1.5 py-1 cursor-pointer hover:bg-gray-600"
                     onClick={handleHalfClick}
                   >
                     HALF
                   </button>
                   <button
-                    className="bg-gray-700 rounded px-2 py-0.5 cursor-pointer hover:bg-gray-600"
+                    className="bg-gray-700/40 rounded px-1.5 py-1 cursor-pointer hover:bg-gray-600"
                     onClick={handleMaxClick}
                   >
                     MAX
@@ -159,8 +160,8 @@ export default function SwapInterface() {
 
             {/* Swap direction button */}
             <div className="flex justify-center mx- -mt-3 -mb-3 relative z-10">
-              <button className="bg-[#1c2230] border-3 border-zinc-950 hover:border-[#c9f283] cursor-pointer  rounded-full p-1 hover:bg-[#252e40]">
-                <ArrowDownIcon size={16} />
+              <button className="bg-[#1c2230] border-3 border-[#0e1116] hover:border-[#c9f283] cursor-pointer  rounded-full p-1 hover:bg-[#252e40]">
+                <HiArrowsUpDown size={16} color="#4a5565" />
               </button>
             </div>
 
