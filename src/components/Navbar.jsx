@@ -43,6 +43,7 @@ const Navbar = () => {
 
         setWatchlist(updated);
       } catch (error) {
+        
         console.error("Error fetching market data:", error);
       }
     };
@@ -54,7 +55,7 @@ const Navbar = () => {
 
   return (
     <header className="w-full border-b border-gray-800">
-      <div className="container">
+      <div className="con  tainer">
         <div className="flex items-center h-12">
           {/* Logo */}
           <div className="flex items-center gap-4">
@@ -101,15 +102,15 @@ const Navbar = () => {
           <div className="flex-1 mx-4 md:mx-8">
             <div className="relative">
               <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-                <SearchIcon size={18} />
+                <SearchIcon size={18}  />
               </div>
               <input
                 type="text"
                 placeholder="Search for any Token, Wallet or Feature"
-                className="w-full border border-[#1c2230] text-gray-400 rounded-full py-2 pl-10 pr-4 text-xs"
+                className="w-[85%] border border-[#1c2230] text-gray-400 rounded-full py-2 pl-10 pr-4 text-xs"
               />
-              <div className="absolute inset-y-0 right-3 flex items-center">
-                <span className="text-gray-500">/</span>
+              <div className="absolute inset-y-0 right-20 flex items-center">
+                <span className=" text-gray-500">/</span>
               </div>
             </div>
           </div>

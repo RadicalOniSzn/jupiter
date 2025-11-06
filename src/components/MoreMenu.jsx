@@ -1,5 +1,7 @@
 import React from "react";
 import { DollarSignIcon, BellIcon, LayoutIcon } from "lucide-react";
+import { FaTwitter, FaGithub, FaLinkedin, FaYoutube } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 export default function MoreMenu({ onClose }) {
   return (
@@ -85,38 +87,13 @@ export default function MoreMenu({ onClose }) {
         </div>
 
         {/* Social Links */}
-        <div className="border-t border-gray-800 mt-2 pt-2">
-          <div className="grid grid-cols-5 gap-4 p-3">
-            {[
-              { name: "Twitter", icon: "M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6..." },
-              { name: "Discord", icon: "M8.56 2.75c4.37 6.03 6.02 9.42..." },
-              { name: "Telegram", icon: "M21.73 18.35L18.36 5.65..." },
-              { name: "YouTube", icon: "M2.5 17a24.12 24.12 0 010-10..." },
-              { name: "Reddit", icon: "M12 8v8 M8 12h8" },
-            ].map((item, index) => (
-              <a
-                key={index}
-                href="#"
-                className="flex flex-col items-center gap-1 text-gray-400 hover:text-white"
-              >
-                <div className="w-8 h-8 flex items-center justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d={item.icon}></path>
-                  </svg>
-                </div>
-                <span className="text-xs">{item.name}</span>
-              </a>
-            ))}
+        <div className="border-t items-center border-gray-800 mt-2 pt-2">
+          <div className="flex justify-center sm:justify-start space-x-8 px-4 mt-5 mb-3 sm:mt-6 text-xl sm:text-2xl text-gray-400">
+            <Link to="#"className="text-gray-400 hover:text-[#c9f283]"><FaTwitter /></Link>
+            <Link to="#"className="text-gray-400 hover:text-[#c9f283]"><FaGithub /></Link>
+            <Link to="#"className="text-gray-400 hover:text-[#c9f283]"><FaLinkedin /></Link>
+            <Link to="#"className="text-gray-400 hover:text-[#c9f283]"><FaYoutube /></Link>
+            <Link to="#"className="text-gray-400 hover:text-[#c9f283]"><FaTwitter /></Link>
           </div>
         </div>
       </div>

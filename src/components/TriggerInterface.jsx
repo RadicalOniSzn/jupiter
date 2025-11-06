@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { TokenSelector } from "./TokenSelector";
 import { HiArrowsUpDown } from "react-icons/hi2";
-import {InfoIcon, ChevronDownIcon } from "lucide-react";
+import { InfoIcon, ChevronDownIcon } from "lucide-react";
 import { TokenModal } from "./TokenModal";
 
 export default function TriggerInterface() {
-  
   const [sellAmount, setSellAmount] = useState("");
+  const [buyAmount, setBuyAmount] = useState("");
+  const [showTokenModal, setShowTokenModal] = useState(false);
+  const [selectedToken, setSelectedToken] = useState(null);
   const [rate, setRate] = useState("0.00000009000000");
   const [expiry, setExpiry] = useState("Never");
-  
+
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
@@ -18,15 +20,12 @@ export default function TriggerInterface() {
     const value = e.target.value;
     setSellAmount(value);
 
-  
     if (value && !isNaN(value)) {
       setBuyAmount((parseFloat(value) * 19000).toFixed(2));
     } else {
       setBuyAmount("");
     }
   };
-
-  
 
   const handleHalfClick = () => {
     setSellAmount("0.005");
@@ -36,6 +35,10 @@ export default function TriggerInterface() {
   const handleMaxClick = () => {
     setSellAmount("0.010147684");
     setBuyAmount("192.80");
+  };
+  const openTokenModal = (type) => {
+    setSelectedToken(type);
+    setShowTokenModal(true);
   };
 
   const handleRateChange = (e) => {
@@ -69,48 +72,45 @@ export default function TriggerInterface() {
 
       {/* Selling section */}
       <div className="p-4 bg-[#131722] mx-3 rounded-2xl  border-b border-gray-800">
-              <div className="flex justify-between items-center  mb-2">
-                <span className="text-xs">Selling</span>
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                  <span>0.010147684 SOL</span>
-                  <button
-                    className="bg-gray-700/40 rounded text-xs  px-1.5 py-1 cursor-pointer hover:bg-gray-600"
-                    onClick={handleHalfClick}
-                  >
-                    HALF
-                  </button>
-                  <button
-                    className="bg-gray-700/40 rounded px-1.5 py-1 cursor-pointer hover:bg-gray-600"
-                    onClick={handleMaxClick}
-                  >
-                    MAX
-                  </button>
-                </div>
-              </div>
-              <div className=" rounded-lg pt-5 ">
-                <div className="flex justify-between ">
-                  <div onClick={() => openTokenModal("sell")}>
-                    <TokenSelector token="SOL" className="cursor-pointer" />
-                  </div>
-                  <div className="text-right ">
-
-                    <input
-                      type="text"
-                      value={sellAmount}
-                      onChange={handleSellAmountChange}
-                      placeholder="0.00"
-                      className="text-3xl font-light bg-transparent text-right w-full focus:outline-none"
-                    />
-                    <div className="text-gray-400 text-sm">
-                      $
-                      {sellAmount
-                        ? (parseFloat(sellAmount) * 229.8).toFixed(2)
-                        : "0"}
-                    </div>
-                  </div>
-                </div>
+        <div className="flex justify-between items-center  mb-2">
+          <span className="text-xs">Selling</span>
+          <div className="flex items-center gap-2 text-xs text-gray-400">
+            <span>0.010147684 SOL</span>
+            <button
+              className="bg-gray-700/40 rounded text-xs  px-1.5 py-1 cursor-pointer hover:bg-gray-600"
+              onClick={handleHalfClick}
+            >
+              HALF
+            </button>
+            <button
+              className="bg-gray-700/40 rounded px-1.5 py-1 cursor-pointer hover:bg-gray-600"
+              onClick={handleMaxClick}
+            >
+              MAX
+            </button>
+          </div>
+        </div>
+        <div className=" rounded-lg pt-5 ">
+          <div className="flex justify-between ">
+            <div onClick={() => openTokenModal("sell")}>
+              <TokenSelector token="SOL" className="cursor-pointer" />
+            </div>
+            <div className="text-right ">
+              <input
+                type="text"
+                value={sellAmount}
+                onChange={handleSellAmountChange}
+                placeholder="0.00"
+                className="text-3xl font-light bg-transparent text-right w-full focus:outline-none"
+              />
+              <div className="text-gray-400 text-sm">
+                $
+                {sellAmount ? (parseFloat(sellAmount) * 229.8).toFixed(2) : "0"}
               </div>
             </div>
+          </div>
+        </div>
+      </div>
 
       {/* Swap direction button */}
       <div className="flex justify-center mx- -mt-3 -mb-3 relative z-10">
@@ -120,31 +120,24 @@ export default function TriggerInterface() {
       </div>
 
       {/* Buying section */}
-      <div className="p-4 border-b border-gray-800">
-        <div className="flex justify-between items-center mb-2">
+      <div className="p-4 mx-3 rounded-3xl  border border-gray-800">
+        <div className="flex  justify-between items-center mb-2">
           <span className="text-sm">Buying</span>
-          <div className="flex items-center gap-2 text-xs text-gray-400">
-            <span>1,172,678.62 Bonk</span>
+          <div className="flex  items-center gap-2 text-xs text-gray-400">
+            <span>{buyAmount ? `${buyAmount} Bonk` : "0.00 Bonk"}</span>
           </div>
         </div>
-        <div className="bg-[#131722] rounded-lg p-3">
-          <div className="flex justify-between">
-            <TokenSelector token="Bonk" iconColor="orange" />
-            <div className="text-right">
-              <div className="text-3xl font-light">
-                {sellAmount && parseFloat(sellAmount) > 0
-                  ? Math.floor(
-                      parseFloat(sellAmount) / parseFloat(rate)
-                    ).toLocaleString()
-                  : "0"}
-              </div>
+        <div className="rounded-lg p-3 ">
+          <div className="flex justify-between  ">
+            <div onClick={() => openTokenModal("buy")}>
+              <TokenSelector token="Bonk" iconColor="orange" />
+            </div>
+            <div className="text-right ">
+              <div className="text-3xl  font-light">{buyAmount || "0.00"}</div>
               <div className="text-gray-400 text-sm">
                 $
-                {sellAmount && parseFloat(sellAmount) > 0
-                  ? (
-                      Math.floor(parseFloat(sellAmount) / parseFloat(rate)) *
-                      0.0120906
-                    ).toFixed(2)
+                {buyAmount
+                  ? (parseFloat(buyAmount) * 0.0120906).toFixed(2)
                   : "0"}
               </div>
             </div>
